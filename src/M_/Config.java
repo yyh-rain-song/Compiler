@@ -10,7 +10,7 @@ public class Config {
         if(DebugState){
             try {
                 //fin = new FileInputStream("D:\\Compiler\\codes\\trial_1\\src\\M_\\program.cpp");
-                fin = new FileInputStream("D:\\Compiler\\codes\\trial_1\\testcase\\testcase_10.txt");
+                fin = new FileInputStream("D:\\Compiler\\codes\\trial_1\\testcase\\testcase_32.txt");
                 fout = new PrintStream("program.asm");
             } catch (Exception e){
                 System.err.println("In Out error");

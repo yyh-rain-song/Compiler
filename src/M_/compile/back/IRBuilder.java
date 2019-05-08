@@ -15,6 +15,7 @@ import M_.Symbol.*;
 import java.util.*;
 
 import static M_.IR.RegisterSet.*;
+import static java.lang.Integer.valueOf;
 
 
 public class IRBuilder implements IAstVisitor {
@@ -110,7 +111,7 @@ public class IRBuilder implements IAstVisitor {
         library_setValue = new Function(Function.Type.Library, "setValue", true);
 
 
-        library_init = new Function(Function.Type.Library, "initStatement", true);
+        library_init = new Function(Function.Type.Library, "init", true);
         external_malloc = new Function(Function.Type.External, "malloc", true);
 
     }
@@ -546,7 +547,7 @@ public class IRBuilder implements IAstVisitor {
         Operand operand;
         switch(node.typeName) {
             case "int":
-                operand = new Immediate(Integer.valueOf(node.value));
+                operand = new Immediate(valueOf(node.value));
                 break;
             case "null":
                 operand = new Immediate(0);
@@ -903,17 +904,17 @@ public class IRBuilder implements IAstVisitor {
         node.expression.accept(this);
         Operand operand = exprResultMap.get(node.expression);
         switch(node.op) {
-            case "v++": case "v--": {
+            case " ++": case " --": {
                 assert operand instanceof Address;
                 VirtualRegister oldValue = new VirtualRegister("");
                 curBB.append(new Move(curBB, oldValue, operand));
-                curBB.append(new UnaryInst(curBB, node.op.equals("v++") ? UnaryInst.UnaryOp.INC : UnaryInst.UnaryOp.DEC, (Address) operand));
+                curBB.append(new UnaryInst(curBB, node.op.equals(" ++") ? UnaryInst.UnaryOp.INC : UnaryInst.UnaryOp.DEC, (Address) operand));
                 exprResultMap.put(node, oldValue);
             }
             break;
-            case "++v": case "--v": {
+            case "++ ": case "-- ": {
                 assert operand instanceof Address;
-                curBB.append(new UnaryInst(curBB, node.op.equals("++v") ? UnaryInst.UnaryOp.INC : UnaryInst.UnaryOp.DEC, (Address) operand));
+                curBB.append(new UnaryInst(curBB, node.op.equals("++ ") ? UnaryInst.UnaryOp.INC : UnaryInst.UnaryOp.DEC, (Address) operand));
                 exprResultMap.put(node, operand);
             }
             break;
@@ -970,9 +971,9 @@ public class IRBuilder implements IAstVisitor {
             case "|": bop = BinaryInst.BinaryOp.OR; isRevertable = true; break;
             case "^": bop = BinaryInst.BinaryOp.XOR; isRevertable = true; break;
         }
-        lhs.accept(this);
+        //lhs.accept(this);
         Operand olhs = exprResultMap.get(lhs);
-        rhs.accept(this);
+        //rhs.accept(this);
         Operand orhs = exprResultMap.get(rhs);
         Address result = new VirtualRegister("");
 
@@ -1069,7 +1070,31 @@ public class IRBuilder implements IAstVisitor {
                 if(node.op.equals("+") && isStringType(node.type)) {
                     exprResultMap.put(node, doStringConcate(node.lhs, node.rhs));
                 } else {
-                    exprResultMap.put(node, doArithmeticBinary(node.op, assignToMap.get(node), node.lhs, node.rhs));
+                    node.lhs.accept(this);
+                    node.rhs.accept(this);
+                    Operand ol = exprResultMap.get(node.lhs);
+                    Operand or = exprResultMap.get(node.rhs);
+                    if(ol instanceof Immediate && or instanceof Immediate){
+                        int left = valueOf(((Immediate) ol).value);
+                        int right = valueOf(((Immediate) or).value);
+                        int value;
+                        switch(node.op){
+                            case "*": value = left * right; break;
+                            case "/": value = left / right; break;
+                            case "%": value = left % right; break;
+                            case "+": value = left + right; break;
+                            case "-": value = left - right; break;
+                            case ">>": value = left >> right; break;
+                            case "<<": value = left << right; break;
+                            case "&": value = left & right; break;
+                            case "|": value = left | right; break;
+                            case "^": value = left ^ right; break;
+                            default: value = -23232;
+                        }
+                        Immediate imm = new Immediate(value);
+                        exprResultMap.put(node, imm);
+                    } else
+                        exprResultMap.put(node, doArithmeticBinary(node.op, assignToMap.get(node), node.lhs, node.rhs));
                 }
                 break;
             case "<": case ">": case "==": case ">=": case "<=": case "!=":

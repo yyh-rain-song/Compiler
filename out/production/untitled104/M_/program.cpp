@@ -1,46 +1,63 @@
-// input: 1 2 3 4
+int gcd(int x, int y) {
+  if (x%y == 0) return y;
+  else return gcd5(y, x%y);
+}
 
-int[] a = new int[4];
-int main()
-{
-    int[][] b = new int[4][];
-	int i;
-	b[0] = a;
-	b[1] = a;
-	b[2] = a;
-	b[3] = a;
-	println(toString(b.size()));
-	for (i = 0; i < b[0].size(); i++)
-		b[0][i] = getInt();
-	for (i = 0; i < b[1].size(); i++)
-		print(toString(b[1][i]));
-	println("");
-	for (i = 0; i < b[2].size(); i++)
-		b[2][i] = 0;
-	for (i = 0; i < b[3].size(); i++)
-		print(toString(b[3][i]));
+
+int gcd1(int x, int y) {
+  if (x%y == 0) return y;
+  else return gcd(y, x%y);
+}
+
+
+int gcd2(int x, int y) {
+  if (x%y == 0) return y;
+  else return gcd1(y, x%y);
+}
+
+
+
+int gcd3(int x, int y) {
+  if (x%y == 0) return y;
+  else return gcd2(y, x%y);
+}
+
+
+int gcd4(int x, int y) {
+  if (x%y == 0) return y;
+  else return gcd(y, x%y);
+}
+
+
+int gcd5(int x, int y) {
+  if (x%y == 0) return y;
+  else return gcd2(y, x%y);
+}
+
+int main() {
+    println(toString(gcd(10,1)));
+    println(toString(gcd(34986,3087)));
+    println(toString(gcd(2907,1539)));
+
     return 0;
 }
 
 
 
-
 /*!! metadata:
 === comment ===
-array_test2-mahaojun.mx
+codegen2-5140309569-xushichao.txt
+gcd_modified
 === input ===
-1
-2
-3
-4
+
 === assert ===
 output
 === timeout ===
-0.1
+1.0
 === output ===
-4
-1234
-0000
+1
+1029
+171
 === phase ===
 codegen pretest
 === is_public ===

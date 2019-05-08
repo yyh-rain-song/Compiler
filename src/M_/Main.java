@@ -131,7 +131,7 @@ public class Main {
         }
     }
     public static void main(String[] args) throws IOException {
-        Config.DebugState = false ;
+        Config.DebugState = false;
         Config.init();
         Compile(Config.fin);
 
