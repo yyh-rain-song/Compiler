@@ -1,0 +1,26 @@
+define main () {
+	b0:
+	mov v0, 10
+	mov v1, 0
+	mov v2, 1
+	mov v3, 1
+	b1:
+	jl v3, v0, b2, b3
+	b3:
+	mov rax, v4
+	b4:
+	ret 
+	b2:
+	mov v5, v1
+	add v5, v2
+	mov v4, v5
+	mov v1, v2
+	mov v2, v4
+	b5:
+	jmp b1
+}
+define initStatement () {
+	b6:
+	call rax = main
+	ret 
+}

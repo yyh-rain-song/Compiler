@@ -1,0 +1,31 @@
+_main:
+	b0:
+	push rbp
+	mov rbp, rsp
+	mov rdx, 10
+	mov rdi, 0
+	mov rax, 1
+	mov rsi, 1
+	b1:
+	cmp rsi, rdx
+	jl b2
+	b3:
+	mov rax, rcx
+	b4:
+	leave
+	ret 
+	b2:
+	mov rcx, rdi
+	add rcx, rax
+	mov rdi, rax
+	mov rax, rcx
+	b5:
+	jmp b1
+__initStatement:
+	b6:
+	push rbp
+	mov rbp, rsp
+	call _main
+	leave
+	ret 
+	section .data
