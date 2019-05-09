@@ -85,6 +85,13 @@ public class Main {
         }
         System.err.println("ir built!");
 
+//        LocalValueOpt localValueOpt = new LocalValueOpt(iRprogram);
+//        localValueOpt.run();
+        if(Config.UselessInstElim){
+            UselessInstElim eliminator = new UselessInstElim(iRprogram);
+            eliminator.run();
+        }
+
         IRCorrector corrector = new IRCorrector();
         iRprogram.accept(corrector);
         if(Config.printIR)

@@ -197,7 +197,7 @@ public class IRBuilder implements IAstVisitor {
 //    private boolean deserveBackOptimization(FuncDeclaration funcDeclaration) {
 //        Function function = functionMap.get(funcDeclaration.symbol.name);
 //        if(funcDeclaration.name.equals("func")) return false;   //  hack it!
-//        return  Config.useBackupOptimization
+//        return  Config.BackupOptm
 //                && funcDeclaration.symbol.isGlobalFunction
 //                && !function.hasOutput
 //                && function.recursiveUsedGlobalVariables.isEmpty()
@@ -828,7 +828,7 @@ public class IRBuilder implements IAstVisitor {
 
         curBB.append(new Jump(curBB, inlineFuncBodyBB));
         curBB = inlineFuncBodyBB;
-        VirtualRegister result = null;
+        //VirtualRegister result = null;
 
         boolean oldIsInline = isInInline;
         isInInline = true;

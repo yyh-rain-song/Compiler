@@ -1,66 +1,130 @@
-int gcd(int x, int y) {
-  if (x%y == 0) return y;
-  else return gcd5(y, x%y);
+int fibo(int x)
+{
+	if(x<2) return x;
+	else return fibo(x-1)*x;
 }
-
-
-int gcd1(int x, int y) {
-  if (x%y == 0) return y;
-  else return gcd(y, x%y);
+int main()
+{
+	println(toString(fibo(10)));
+	return 0;
 }
-
-
-int gcd2(int x, int y) {
-  if (x%y == 0) return y;
-  else return gcd1(y, x%y);
-}
-
-
-
-int gcd3(int x, int y) {
-  if (x%y == 0) return y;
-  else return gcd2(y, x%y);
-}
-
-
-int gcd4(int x, int y) {
-  if (x%y == 0) return y;
-  else return gcd(y, x%y);
-}
-
-
-int gcd5(int x, int y) {
-  if (x%y == 0) return y;
-  else return gcd2(y, x%y);
-}
-
-int main() {
-    println(toString(gcd(10,1)));
-    println(toString(gcd(34986,3087)));
-    println(toString(gcd(2907,1539)));
-
-    return 0;
-}
-
-
 
 /*!! metadata:
 === comment ===
-codegen2-5140309569-xushichao.txt
-gcd_modified
-=== input ===
-
+侯博涵 fake fibo fixed
+=== is_public ===
+True
 === assert ===
 output
 === timeout ===
 1.0
-=== output ===
-1
-1029
-171
+=== input ===
+
 === phase ===
 codegen pretest
-=== is_public ===
-True
+=== output ===
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+3628800
+=== exitcode ===
+0
 
 !!*/
