@@ -24,7 +24,7 @@ public class SimpleGraphAllocator {
     public SimpleGraphAllocator(IRProgram irProgram) {
         this.irProgram = irProgram;
         for(PhysicalRegister pr : RegisterSet.allRegs) {
-            if(pr.name.equals("rsp") || pr.name.equals("rbp"))
+            if(pr.name.equals("rsp") || pr.name.equals("rbp")||pr.name.equals("rax"))
                 continue;
             generalRegisters.add(pr);
         }
