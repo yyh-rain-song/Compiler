@@ -1,0 +1,132 @@
+int main(){
+    int i;
+    int j;
+    int k;
+    int l;
+    int m;
+    int n;
+    int o;
+
+    int sum = 0;
+
+    for (i = 0; i < 100; i++)
+        if (i > 90) {
+            sum++;
+        }
+
+    for (i = 0; i < 100; i++)
+        for (j = 0; j < 100; j++)
+            if (i > 90) {
+                if (j > 90) {
+                    sum++;
+                }
+            }
+
+    for (i = 0; i < 100; i++)
+        for (j = 0; j < 100; j++)
+            for (k = 0; k < 100; k++)
+                if (i > 90) {
+                    if (j > 90) {
+                        if (k > 90) {
+                            sum++;
+                        }
+                    }
+                }
+
+    for (i = 0; i < 10; i++)
+        for (j = 0; j < 10; j++)
+            for (k = 0; k < 10; k++)
+                for (l = 0; l < 10; l++)
+                    if (i > 5) {
+                        if (j > 5) {
+                            if (k > 5) {
+                                if (l > 5) {
+                                    sum++;
+                                }
+                            }
+                        }
+                    }
+
+    for (i = 0; i < 10; i++)
+        for (j = 0; j < 10; j++)
+            for (k = 0; k < 10; k++)
+                for (l = 0; l < 10; l++)
+                    for (m = 0; m < 10; m++)
+                        if (i > 5) {
+                            if (j > 5) {
+                                if (k > 5) {
+                                    if (l > 5) {
+                                        if (m > 5) {
+                                            sum++;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+    for (i = 0; i < 10; i++)
+        for (j = 0; j < 10; j++)
+            for (k = 0; k < 10; k++)
+                for (l = 0; l < 10; l++)
+                    for (m = 0; m < 10; m++)
+                        for (n = 0; n < 10; n++)
+                            if (i > 5) {
+                                if (j > 5) {
+                                    if (k > 5) {
+                                        if (l > 5) {
+                                            if (m > 5) {
+                                                if (n > 5) {
+                                                    sum++;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+    for (i = 0; i < 5; i++)
+        for (j = 0; j < 5; j++)
+            for (k = 0; k < 5; k++)
+                for (l = 0; l < 5; l++)
+                    for (m = 0; m < 5; m++)
+                        for (n = 0; n < 5; n++)
+                            for (o = 0; o < 5; o++)
+                                if (i > 5) {
+                                    if (j > 5) {
+                                        if (k > 5) {
+                                            if (l > 5) {
+                                                if (m > 5) {
+                                                    if (n > 5) {
+                                                        if (o > 5) {
+                                                            sum++;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+    println(toString(sum));
+    return 0;
+}
+
+/*!! metadata:
+=== comment ===
+侯博涵 反正都是判，三个八个一样判 fixed fixed
+=== is_public ===
+True
+=== assert ===
+output
+=== timeout ===
+1.0
+=== input ===
+
+=== phase ===
+codegen pretest
+=== output ===
+6195
+=== exitcode ===
+0
+
+!!*/
+

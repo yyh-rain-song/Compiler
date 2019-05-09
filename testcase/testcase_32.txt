@@ -30,6 +30,7 @@ output
 0.1
 === output ===
 13
+=== phase ===
 codegen pretest
 === is_public ===
 True

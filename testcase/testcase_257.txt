@@ -182,8 +182,8 @@ int heapsort(){
 int main(){
 	int i1;int i2;int i3;int i4;int i5;int i6;int i7;int i8;
 	int i9;int i10;int i11;int i12; int i13; int i14;
-	n = getInt();
-	int k = getInt();
+	n = 10000;
+	int k = 1000;
 	int i;
 	for(i = 1; i <= n; i++){
 		a[i] = i;

@@ -221,6 +221,13 @@ public interface M_Visitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrefix(M_Parser.PrefixContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code bitor}
+	 * labeled alternative in {@link M_Parser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBitor(M_Parser.BitorContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code class_func}
 	 * labeled alternative in {@link M_Parser#statement}.
 	 * @param ctx the parse tree
@@ -270,19 +277,26 @@ public interface M_Visitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitThis_(M_Parser.This_Context ctx);
 	/**
+	 * Visit a parse tree produced by the {@code bitand}
+	 * labeled alternative in {@link M_Parser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBitand(M_Parser.BitandContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code bitxor}
+	 * labeled alternative in {@link M_Parser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBitxor(M_Parser.BitxorContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code variable}
 	 * labeled alternative in {@link M_Parser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitVariable(M_Parser.VariableContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code bitop}
-	 * labeled alternative in {@link M_Parser#statement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBitop(M_Parser.BitopContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code class_member}
 	 * labeled alternative in {@link M_Parser#statement}.

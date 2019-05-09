@@ -1,0 +1,74 @@
+_main:
+	b0:
+	push rbp
+	mov rbp, rsp
+	sub rsp, 16
+	mov rbx, qword [g_0]
+	mov qword [g_0], rbx
+	mov rbx, 0
+	mov qword [rbp - 16], rbx
+	b1:
+	mov rbx, qword [rbp - 16]
+	cmp rbx, 4
+	jl b2
+	b3:
+	mov rax, 0
+	b4:
+	mov rbx, qword [g_0]
+	mov qword [g_0], rbx
+	leave
+	ret 
+	b2:
+	call __getInt
+	mov qword [rbp - 8], rax
+	mov rbx, qword [rbp - 8]
+	mov r10, qword [g_0]
+	mov r11, qword [rbp - 16]
+	mov qword [r10 + r11 * 8 + 8], rbx
+	b5:
+	mov rbx, qword [rbp - 16]
+	inc rbx
+	mov qword [rbp - 16], rbx
+	jmp b1
+__init:
+	b6:
+	push rbp
+	mov rbp, rsp
+	sub rsp, 32
+	mov rbx, 4
+	mov qword [rbp - 24], rbx
+	mov rbx, qword [rbp - 8]
+	mov r10, qword [rbp - 24]
+	lea rbx, [r10 * 8 + 8]
+	mov qword [rbp - 8], rbx
+	mov rdi, qword [rbp - 8]
+	call malloc
+	mov qword [rbp - 16], rax
+	mov rbx, qword [rbp - 16]
+	mov qword [rbx], 4
+	b7:
+	mov rbx, qword [rbp - 24]
+	cmp rbx, 0
+	jg b8
+	b9:
+	mov rbx, qword [rbp - 16]
+	mov r10, rbx
+	mov qword [g_0], r10
+	mov rbx, qword [g_0]
+	mov qword [g_0], rbx
+	call _main
+	mov rbx, qword [g_0]
+	mov qword [g_0], rbx
+	leave
+	ret 
+	b8:
+	mov rbx, qword [rbp - 16]
+	mov r10, qword [rbp - 24]
+	mov qword [rbx + r10 * 8], 0
+	mov rbx, qword [rbp - 24]
+	dec rbx
+	mov qword [rbp - 24], rbx
+	jmp b7
+	section .data
+g_0:
+	db 00H, 00H, 00H, 00H, 00H, 00H, 00H, 00H

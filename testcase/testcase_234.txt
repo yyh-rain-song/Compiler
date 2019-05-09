@@ -15,7 +15,7 @@ int main() {
     string a = "A";
 	string b = "B";
 	string c = "C";
-    int d = getInt();
+    int d = 27;
     int sum = cd(d, a, b, c, 0);
     println(toString(sum));
     return 0;

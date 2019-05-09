@@ -67,7 +67,9 @@ statement : statement op=('++'|'--')        #postfix
             | statement op=('<<'|'>>') statement            #bitshift
             | statement op=('<'|'<='|'>'|'>=') statement    #compare
             | statement op=('=='|'!=') statement            #equal
-            | statement op=('&'|'|'|'^')statement           #bitop
+            | statement '&'statement                   #bitand
+            | statement '^' statement                  #bitxor
+            | statement '|' statement                  #bitor
             | statement op=('&&'|'||')statement             #logical
             | const_                        #constant
             | THIS                          #this_

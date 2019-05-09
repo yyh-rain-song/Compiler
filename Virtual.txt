@@ -1,0 +1,41 @@
+define main () {
+	b0:
+	mov v0, qword [g_0]
+	mov v1, 0
+	b1:
+	jl v1, 4, b2, b3
+	b3:
+	mov rax, 0
+	b4:
+	mov qword [g_0], v0
+	ret 
+	b2:
+	call rax = getInt
+	mov v2, rax
+	mov qword [v0 + v1 * 8 + 8], v2
+	b5:
+	inc v1
+	jmp b1
+}
+define init () {
+	b6:
+	mov v3, 4
+	lea v4, [v3 * 8 + 8]
+	mov rdi, v4
+	call rax = malloc, v4
+	mov v5, rax
+	mov qword [v5], 4
+	b7:
+	jg v3, 0, b8, b9
+	b9:
+	mov v0, v5
+	mov qword [g_0], v0
+	call rax = main
+	mov v0, qword [g_0]
+	ret 
+	b8:
+	mov qword [v5 + v3 * 8], 0
+	dec v3
+	jmp b7
+}
+g_0: 8 bytes

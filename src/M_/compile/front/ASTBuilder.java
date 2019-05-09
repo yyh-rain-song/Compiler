@@ -406,12 +406,35 @@ public class ASTBuilder extends M_BaseVisitor<Object> {
     {
         return new Identifier(ctx.ID().getSymbol());
     }
-
-    @Override public BinaryExpression visitBitop(M_Parser.BitopContext ctx)
+    @Override public BinaryExpression visitBitor(M_Parser.BitorContext ctx)
     {
         Expression left = (Expression) ctx.statement(0).accept(this);
         Expression right = (Expression) ctx.statement(1).accept(this);
-        String op = ctx.op.getText();
+        String op = "|";
+        BinaryExpression e = new BinaryExpression();
+        e.lhs = left;
+        e.rhs = right;
+        e.op = op;
+        e.location = new Location(ctx.start);
+        return e;
+    }
+    @Override public BinaryExpression visitBitand(M_Parser.BitandContext ctx)
+    {
+        Expression left = (Expression) ctx.statement(0).accept(this);
+        Expression right = (Expression) ctx.statement(1).accept(this);
+        String op = "&";
+        BinaryExpression e = new BinaryExpression();
+        e.lhs = left;
+        e.rhs = right;
+        e.op = op;
+        e.location = new Location(ctx.start);
+        return e;
+    }
+    @Override public BinaryExpression visitBitxor(M_Parser.BitxorContext ctx)
+    {
+        Expression left = (Expression) ctx.statement(0).accept(this);
+        Expression right = (Expression) ctx.statement(1).accept(this);
+        String op = "^";
         BinaryExpression e = new BinaryExpression();
         e.lhs = left;
         e.rhs = right;

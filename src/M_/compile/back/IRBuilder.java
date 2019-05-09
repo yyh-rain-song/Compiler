@@ -538,8 +538,6 @@ public class IRBuilder implements IAstVisitor {
             curBB.append(new CJump(curBB, operand, CJump.CompareOp.NE,
                     new Immediate(0), trueBBMap.get(node), falseBBMap.get(node)));
         } else {
-            if(exprResultMap.containsKey(node))
-                System.err.println("???");
             exprResultMap.put(node, operand);
         }
     }
@@ -612,6 +610,7 @@ public class IRBuilder implements IAstVisitor {
             if(isBoolType(e.type)){
                 VirtualRegister vr = new VirtualRegister("");
                 boolAssign(e, vr);
+                arguments.add(vr);
                 continue;
             }
             e.accept(this);
@@ -822,8 +821,11 @@ public class IRBuilder implements IAstVisitor {
             curBB.append(new Move(curBB, vr, op));
             vrArguments.add(vr);
         }
-        for(int i = 0; i < funcDeclaration.parameters.size(); i++)
-            inlineVariableRegisterStack.getLast().put(funcDeclaration.parameters.get(i).symbol, vrArguments.get(i));
+        if(funcDeclaration.parameters != null)
+            for(int i = 0; i < funcDeclaration.parameters.size(); i++){
+                VariableSymbol symbol = funcDeclaration.parameters.get(i).symbol;
+                inlineVariableRegisterStack.getLast().put(symbol, vrArguments.get(i));
+            }
         BasicBlock inlineFuncBodyBB = new BasicBlock(curFunction, "inlineFuncBodyBB");
         BasicBlock inlineFuncAfterBB = new BasicBlock(curFunction, "inlineFuncAfterBB");
         inlineFuncAfterBBStack.addLast(inlineFuncAfterBB);
@@ -835,7 +837,9 @@ public class IRBuilder implements IAstVisitor {
         boolean oldIsInline = isInInline;
         isInInline = true;
 
-        for(Statement st : funcDeclaration.body.statements)
+        //LinkedList<Statement> body = new LinkedList<>(funcDeclaration.body.statements);
+        //for(Statement st : body)
+        for(Statement st: funcDeclaration.body.statements)
             st.accept(this);
 
         if(!(curBB.tail instanceof Jump))

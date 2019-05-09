@@ -1,0 +1,26 @@
+int main() {
+    int n = 60;
+    print(toString(n / 10));
+    return 0;
+}
+
+/*!! metadata:
+=== comment ===
+陈宇轩 test for DIV
+=== is_public ===
+True
+=== assert ===
+success_compile
+=== timeout ===
+1.0
+=== input ===
+60
+=== phase ===
+codegen extended
+=== output ===
+6
+=== exitcode ===
+0
+
+!!*/
+

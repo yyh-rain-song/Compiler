@@ -6,7 +6,7 @@ int fibo(int x)
 }
 int main()
 {
-	int n = getInt();
+	int n = 32;
 	println(toString(fibo(n)));
 	int i = 0;
 	for (; i <= 100; ++i)

@@ -9,7 +9,7 @@ int h(int a){
 
 int main(){
     int a;
-    a=getInt();
+    a=17;
     println(toString(h(a)));
     return 0;
 }
