@@ -23,8 +23,35 @@ public class ASTBuilder extends M_BaseVisitor<Object> {
         for(M_Parser.Program_unitContext decl:ctx.program_unit()){
             program.add(visitProgram_unit(decl));
         }
+        //doOptmAboutFor_If();
         return null;
     }
+//    private void doOptmAboutFor_If(){
+//        LinkedList<FuncDeclaration> funcs = new LinkedList<>();
+//        funcs.addAll(program.functions);
+//        for(ClassDeclaration classes: program.classes){
+//            if(classes.constructor != null)
+//                funcs.add(classes.constructor);
+//            if(classes.methods != null)
+//                funcs.addAll(classes.methods);
+//        }
+//        for(FuncDeclaration func: funcs){
+//            for(Statement stm: func.body.statements){
+//                if(stm instanceof ForStatement){
+//                    IfStatement first = null;
+//                    if(((ForStatement) stm).body instanceof IfStatement)
+//                        first = (IfStatement) ((ForStatement) stm).body;
+//                    else if(((ForStatement) stm).body instanceof BlockStatement){
+//                        if(((BlockStatement) ((ForStatement) stm).body).statements.size() == 1 &&
+//                        ((BlockStatement) ((ForStatement) stm).body).statements.get(0) instanceof IfStatement)
+//                            first = (IfStatement) ((BlockStatement) ((ForStatement) stm).body).statements.get(0);
+//                    }
+//                    if(first == null) continue;
+//                    Expression if_cond = first.condition;
+//                }
+//            }
+//        }
+//    }
     @Override public Declaration visitProgram_unit(M_Parser.Program_unitContext ctx)
     {
         if(ctx.class_defination() != null)

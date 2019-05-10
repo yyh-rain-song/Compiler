@@ -914,9 +914,9 @@ _f:
 	mov rbp, rsp
 	mov r9, rdi
 	mov rcx, 0
-	mov rsi, 0
+	mov r8, 0
 	b1:
-	cmp rsi, r9
+	cmp r8, r9
 	jl b2
 	b3:
 	mov rax, rcx
@@ -924,11 +924,13 @@ _f:
 	leave
 	ret 
 	b2:
-	add rcx, rsi
-	mov r8, rsi
-	sub r8, 1
+	mov rsi, rcx
+	add rsi, r8
+	mov rcx, r8
+	sub rcx, 1
 	mov rdi, r9
-	and rdi, r8
+	and rdi, rcx
+	mov rcx, rsi
 	xor rcx, rdi
 	mov rax, rcx
 	cdq
@@ -936,20 +938,20 @@ _f:
 	idiv rcx
 	mov rcx, rdx
 	b5:
-	add rsi, 1
+	add r8, 1
 	jmp b1
 _main:
 	b6:
 	push rbp
 	mov rbp, rsp
 	push r14
-	mov rcx, 0
-	mov r8, 0
+	mov r10, 0
+	mov rdi, 0
 	b7:
-	cmp r8, 90000000
+	cmp rdi, 90000000
 	jl b8
 	b9:
-	mov rdi, rcx
+	mov rdi, r10
 	call __toString
 	mov rcx, rax
 	mov rdi, rcx
@@ -960,56 +962,58 @@ _main:
 	leave
 	ret 
 	b8:
-	mov rdi, 0
+	mov rcx, 0
 	b11:
-	cmp rdi, 10
+	cmp rcx, 10
 	jl b12
 	b13:
 	b14:
-	inc r8
+	inc rdi
 	jmp b7
 	b12:
-	cmp r8, 89999999
+	cmp rdi, 89999999
 	jl b15
 	b16:
-	cmp rdi, 9
+	cmp rcx, 9
 	jl b17
 	b18:
-	mov rax, r8
+	mov rax, rdi
 	mov rdx, 8
 	imul rdx
 	mov rsi, rax
-	mov r11, rsi
+	mov r14, rsi
 	b19:
 	mov rsi, 0
-	mov r10, 0
+	mov r9, 0
 	b20:
-	cmp r10, r11
+	cmp r9, r14
 	jl b21
 	b22:
 	mov rax, rsi
 	b23:
 	mov rdx, rax
-	add rcx, rdx
+	add r10, rdx
 	b17:
 	b15:
 	b24:
-	inc rdi
+	inc rcx
 	jmp b11
 	b21:
-	add rsi, r10
-	mov r14, r10
-	sub r14, 1
-	mov r9, r11
-	and r9, r14
-	xor rsi, r9
+	mov r8, rsi
+	add r8, r9
+	mov r11, r9
+	sub r11, 1
+	mov rsi, r14
+	and rsi, r11
+	xor r8, rsi
+	mov rsi, r8
 	mov rax, rsi
 	cdq
 	mov rsi, 10000
 	idiv rsi
 	mov rsi, rdx
 	b25:
-	add r10, 1
+	add r9, 1
 	jmp b20
 __init:
 	b26:

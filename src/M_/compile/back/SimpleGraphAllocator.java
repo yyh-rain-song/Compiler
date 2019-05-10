@@ -29,6 +29,7 @@ public class SimpleGraphAllocator {
             generalRegisters.add(pr);
         }
         K = generalRegisters.size();
+        //System.err.println(K);
     }
 
     public void run() {

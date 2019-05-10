@@ -53,7 +53,7 @@ public class Main {
         if(Config.printAST) {
             ASTPrinter printer = new ASTPrinter();
             program.accept(printer);
-            printer.printTo(System.out);
+            printer.printTo(System.err);
         }
 
         STBuilder stBuilder = new STBuilder(errorRecorder);
@@ -85,8 +85,10 @@ public class Main {
         }
         System.err.println("ir built!");
 
-        LocalValueOpt localValueOpt = new LocalValueOpt(iRprogram);
-        localValueOpt.run();
+        if(Config.LocalVauleOpt) {
+            LocalValueOpt localValueOpt = new LocalValueOpt(iRprogram);
+            localValueOpt.run();
+        }
         if(Config.UselessInstElim){
             UselessInstElim eliminator = new UselessInstElim(iRprogram);
             eliminator.run();
@@ -94,7 +96,7 @@ public class Main {
 
         IRCorrector corrector = new IRCorrector();
         iRprogram.accept(corrector);
-        if(Config.printIR)
+        if(Config.printVirtual_IR)
         {
             IRPrinter printer = new IRPrinter();
             iRprogram.accept(printer);
@@ -121,12 +123,12 @@ public class Main {
         StackFrameBuilder stackBuilder = new StackFrameBuilder(iRprogram);
         stackBuilder.run();
 
-        if(Config.printASM){
+        if(Config.printFrame){
             System.err.println("---------------after frame builder-----------------------");
             IRPrinter irPrinter = new IRPrinter();
             irPrinter.showNasm = true;
             irPrinter.visit(iRprogram);
-            irPrinter.printTo(new PrintStream("Frame_IR.txt"));
+            irPrinter.printTo(Config.frame_out);
         }
 
         if(Config.printASM){

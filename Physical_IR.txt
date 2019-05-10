@@ -1,40 +1,40 @@
 define f (v0) {
 	b0:
-	mov rsi, rdi
+	mov r9, rdi
 	mov rcx, 0
-	mov rdi, 0
+	mov r8, 0
 	b1:
-	jl rdi, rsi, b2, b3
+	jl r8, r9, b2, b3
 	b3:
 	mov rax, rcx
 	b4:
 	ret 
 	b2:
-	mov r8, rcx
-	add r8, rdi
-	mov rcx, rdi
-	sub rcx, 1
-	mov r9, rsi
-	and r9, rcx
+	mov rsi, rcx
+	add rsi, r8
 	mov rcx, r8
-	xor rcx, r9
+	sub rcx, 1
+	mov rdi, r9
+	and rdi, rcx
+	mov rcx, rsi
+	xor rcx, rdi
 	mov rax, rcx
 	cdq
 	mov rcx, 10000
 	idiv rcx
 	mov rcx, rdx
 	b5:
-	add rdi, 1
+	add r8, 1
 	jmp b1
 }
 define main () {
 	b6:
-	mov r9, 0
-	mov r8, 0
+	mov r10, 0
+	mov rdi, 0
 	b7:
-	jl r8, 90000000, b8, b9
+	jl rdi, 90000000, b8, b9
 	b9:
-	mov rdi, r9
+	mov rdi, r10
 	call rax = toString, v1
 	mov rcx, rax
 	mov rdi, rcx
@@ -43,52 +43,54 @@ define main () {
 	b10:
 	ret 
 	b8:
-	mov rsi, 0
+	mov rcx, 0
 	b11:
-	jl rsi, 10, b12, b13
+	jl rcx, 10, b12, b13
 	b13:
 	b14:
-	inc r8
+	inc rdi
 	jmp b7
 	b12:
-	jl r8, 89999999, b15, b16
+	jl rdi, 89999999, b15, b16
 	b16:
-	jl rsi, 9, b17, b18
+	jl rcx, 9, b17, b18
 	b18:
-	mov rax, r8
-	mov rcx, 8
-	imul rcx
-	mov rcx, rax
-	mov r10, rcx
+	mov rax, rdi
+	mov rdx, 8
+	imul rdx
+	mov rsi, rax
+	mov r14, rsi
 	b19:
-	mov rcx, 0
-	mov rdi, 0
+	mov rsi, 0
+	mov r9, 0
 	b20:
-	jl rdi, r10, b21, b22
+	jl r9, r14, b21, b22
 	b22:
-	mov rax, rcx
+	mov rax, rsi
 	b23:
-	mov rcx, rax
-	add r9, rcx
+	mov rdx, rax
+	add r10, rdx
 	b17:
 	b15:
 	b24:
-	inc rsi
+	inc rcx
 	jmp b11
 	b21:
-	add rcx, rdi
-	mov r14, rdi
-	sub r14, 1
-	mov r11, r10
-	and r11, r14
-	xor rcx, r11
-	mov rax, rcx
+	mov r8, rsi
+	add r8, r9
+	mov r11, r9
+	sub r11, 1
+	mov rsi, r14
+	and rsi, r11
+	xor r8, rsi
+	mov rsi, r8
+	mov rax, rsi
 	cdq
-	mov rcx, 10000
-	idiv rcx
-	mov rcx, rdx
+	mov rsi, 10000
+	idiv rsi
+	mov rsi, rdx
 	b25:
-	add rdi, 1
+	add r9, 1
 	jmp b20
 }
 define init () {
